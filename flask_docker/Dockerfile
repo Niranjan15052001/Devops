@@ -1,10 +1,6 @@
-FROM ubuntu
-
-RUN apt-get update
-RUN apt-get install -y python3
-RUN apt-get install -y python3-pip
+FROM python:3-alpine3.15
+WORKDIR /out
+COPY . /out
 RUN pip3 install flask
-
-COPY app.py /opt/
-ENTRYPOINT FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080
-
+EXPOSE 3000
+CMD python ./app.py
