@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: mywebsite
+    tier: frontend
+spec:
+  replicas: 4
+  template:
+    metadata:
+      name: test-pod
+      labels:
+        app: testpod
+    spec:
+      containers:
+        - name: test-pod
+          image: public.ecr.aws/nginx/nginx:latest
+          imagePullPolicy: Always
+  selector:
+    matchLabels:
+      app: testpod
