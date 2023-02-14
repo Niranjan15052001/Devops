@@ -1,0 +1,16 @@
+pipeline {
+    agent any   
+        stages {
+            stage('Cloning our Git') {
+                steps {
+                    dir('C:/Users/Niranjan Hegde/Desktop/Devops_Example/docker/17') {
+                        bat 'docker build -t web-app1 .'
+                    }
+            }
+            stage('Run') {
+                steps {   
+                    bat 'docker run -it web-app1 '
+                }
+            }
+        }
+    }
