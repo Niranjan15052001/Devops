@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stage5
+  labels:
+    app: mywebsite
+    tier: stage
+spec:
+  replicas: 2
+  template:
+    metadata:
+      name: test-pod
+      labels:
+        app: testpod
+    spec:
+      containers:
+        - name: test-pod
+          image: nginx:1.23
+          imagePullPolicy: Always
+  selector:
+    matchLabels:
+      app: testpod

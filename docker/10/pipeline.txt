@@ -7,6 +7,7 @@ pipeline {
                         bat 'docker build -t web-app1 .'
                     }
             }
+            }
             stage('Run') {
                 steps {   
                     bat 'docker run -it web-app1 '

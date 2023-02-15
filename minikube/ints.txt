@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: mywebsite
+    tier: frontend
+spec:
+  replicas: 4
+  template:
+    metadata:
+      name: test-pod
+      labels:
+        app: testpod
+    spec:
+      containers:
+        - name: test-pod
+          image: public.ecr.aws/nginx/nginx:latest
+          imagePullPolicy: Always
+  selector:
+    matchLabels:
+      app: testpod
+
+
+minikube kubectl -- get deployments
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: testpod
+
+
+
+command: 
+minikube kubectl -- create -f service_ex.yaml
+
+minikube kubectl -- get svc
+minikube service frontend –url     // get url
+telnet 192.168.49.2 31433
